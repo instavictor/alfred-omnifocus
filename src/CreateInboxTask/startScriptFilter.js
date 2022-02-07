@@ -66,10 +66,10 @@ const displayAlfredHints = (obj) => {
             arg: obj.arg
 		}, {
 			title: 'General Tip',
-			subtitle: 'todo <text> @dueDate ::project #tag'
+			subtitle: 'todo <text> [@time ::project #tag]'
 		}, {
 			title: 'Advanced Tip',
-			subtitle: 'todo <text> @deferDate @dueDate ::project #tag1 #tag2'
+			subtitle: 'todo <text> @deferDate @dueDate ::project #tag1 #tag2 //notes'
 		}]
 	};
 
