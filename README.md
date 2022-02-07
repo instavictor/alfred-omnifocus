@@ -27,3 +27,7 @@ There are a few custom features:
 - `@` sets a date. If there is only one, it sets the `due date`. If there are two, the first sets the `defer date`, and the second sets the `due date`.
 - `$` sets the task duration.
 - `//` sets the note for the task.
+
+## Resources
+
+- [Gist of JXA and OmniFocus relevant links](https://gist.github.com/instavictor/fb5f632dce2f686949577c00e9bfb3b0)
