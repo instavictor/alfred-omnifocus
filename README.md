@@ -16,7 +16,7 @@ This adds a `todo` shortcut command to create OmniFocus tasks via Alfred.  It ta
 There are a few custom features:
 - Uses `@` to prefix dates instead of `#`.
 - Uses `#` to prefix tags instead of `@`.
-- Provide feedback when a tag does not exist in the app, e.g. 'Warning: no <tag> tag found!`
+- Provide feedback when a tag does not exist in the app, e.g. 'Warning: no `abc` tag found!`
 
 ## Usage
 
