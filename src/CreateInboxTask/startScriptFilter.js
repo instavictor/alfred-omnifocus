@@ -47,6 +47,7 @@ const displayAlfredHints = (obj) => {
                 });
 
                 if (result.length > 0) {
+                    hints = `${hints} #${result[0].name()}`;
                     return true;
                 }
 
@@ -95,10 +96,13 @@ const parseResults = (inputStr) => {
 
     results.forEach(str => {
         const index = inputStr.lastIndexOf(str);
-        const prefixChar = inputStr.charAt(index - 1);
-        console.log('prefixChar:', prefixChar);
 
-        switch(prefixChar) {
+        const hasTwoPrefixChars = inputStr.charAt(index - 2) !== ' ' && inputStr.charAt(index - 2) !== undefined;
+        const prefixChars = (hasTwoPrefixChars)
+            ? `${inputStr.charAt(index - 2)}${inputStr.charAt(index - 1)}`
+            : inputStr.charAt(index - 1);
+
+        switch(prefixChars) {
             case '@':
                 outputStr.push(`#${str}`);
                 break;
