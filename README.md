@@ -21,10 +21,14 @@ There are a few custom features:
 ## Usage
 
 `todo I must do something! @tomorrow #work #home $60 min //some notes`
-- `!` after the text flags the task
-- `#` sets a tag.  If a tag does not exist, there will be a warning displayed.  For now, they must be created manually in the app.
+- `!` after the text flags the task as important
+- `#` sets a tag.  If a tag does not exist, there will be a warning displayed.  For now, they **must be created manually** in the app.
 - `::` sets the project.
-- `@` sets a date. If there is only one, it sets the `due date`. If there are two, the first sets the `defer date`, and the second sets the `due date`.
+- `@` sets a date. If there is only one, it sets the `due date`. If there are two, the first sets the `defer date`, and the second sets the `due date`.  Here are some examples:
+    - `@tomorrow 3.30p` -> sets the due date for 3:30 PM tomorrow
+    - `@tomorrow` -> sets the due date for 5 PM tomorrow
+    - `@3.30p` -> sets the due date for 3:30 PM today
+    - `@today` -> sets the due date for 5 PM today
 - `$` sets the task duration.
 - `//` sets the note for the task.
 
