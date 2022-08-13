@@ -9,7 +9,7 @@ const dateTimeDelimiter = ' @';
 
 const regex = new RegExp(`${tagDelimiter}|${projectDelimiter}|${dateTimeDelimiter}`);
 
-//@ts-ignore - Application is OS specific
+//@ts-ignore - "Application" is OS specific
 const of = Application('OmniFocus');
 
 /**
@@ -18,6 +18,7 @@ const of = Application('OmniFocus');
  * @property {string} name - the name of the task
  * @property {string} arg - the string to passthru to next Alfred task
  * @property {string[]} tagNames - array of tag names to include
+ * @property {string} [projectName] - the project name to assign this task to.  The default is sent to the Inbox.
  * @property {Date} [dueDate] - the date this task is due
  * @property {string} [primaryTag] - the tag to set
  */
@@ -35,9 +36,8 @@ const displayAlfredHints = (obj) => {
             hints = `${obj.name}`;
         }
 
+        const ofDoc = of.defaultDocument;
         if (obj.tagNames.length > 0) {
-            const ofDoc = of.defaultDocument;
-
             obj.tagNames.every((tagName) => {
                 const result = ofDoc.flattenedTags.whose({
                     name: {
@@ -50,11 +50,42 @@ const displayAlfredHints = (obj) => {
                     return true;
                 }
 
-                hints = `Warning: no ${tagName} tag found!`;
+                hints = `Warning: no "${tagName}" tag found!`;
                 return false;
             });
 
             // TODO: scan project names and warn if they don't exist
+        }
+
+        if (obj.projectName) {
+            // NOTE: OmniFocus transport text will only accept the last "valid" project name
+
+            // delimit the obj.projectName to an array
+            const projectNames = obj.projectName.split(' ::');
+
+            const hintsCopy = hints;
+
+            let isFound = false;
+
+            projectNames.every((projectName) => {
+                const result = ofDoc.flattenedProjects.whose({
+                    name: {
+                        _contains: projectName
+                    }
+                });
+
+                if (result.length > 0) {
+                    hints = `${hintsCopy} ::${result[0].name()}`;
+                    isFound = true;
+                    return true;
+                }
+
+                return false;
+            });
+
+            if (!isFound) {
+                hints = `Warning: no "${obj.projectName}" project found! This will default to Inbox`;
+            }
         }
     }
 
@@ -117,7 +148,9 @@ const parseResults = (inputStr) => {
                 break;
             case '::':
                 // TODO: do project assignment
+
                 outputStr.push(`::${str}`);
+                payload.projectName = str.trim();
                 break;
 
             default:
