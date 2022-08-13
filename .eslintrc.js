@@ -1,11 +1,12 @@
 module.exports = {
-    "env": {
-        "es6": true
+    env: {
+        es6: true
     },
-    "parserOptions": {
-        "ecmaVersion": "latest"
+    extends: ['prettier'],
+    parserOptions: {
+        ecmaVersion: 'latest'
     },
-    "rules": {
-        "semi": "error"
+    rules: {
+        semi: 'error'
     }
 };

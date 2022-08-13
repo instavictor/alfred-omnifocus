@@ -17,6 +17,8 @@
     },
     "homepage": "https://github.com/instavictor/alfred-omnifocus#readme",
     "devDependencies": {
-        "eslint": "^8.8.0"
+        "eslint": "^8.8.0",
+        "eslint-config-prettier": "^8.5.0",
+        "prettier": "~2.7.1"
     }
 }

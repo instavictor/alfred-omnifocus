@@ -3,7 +3,6 @@
 
 // https://www.alfredapp.com/help/workflows/inputs/script-filter/json/
 
-
 const tagDelimiter = ' #';
 const projectDelimiter = ' ::';
 const dateTimeDelimiter = ' @';
@@ -25,13 +24,13 @@ const of = Application('OmniFocus');
 
 /**
  * Displays hints back to Alfred, so that it shows in the second line
- * 
+ *
  * @param obj {OFTask}
  */
 const displayAlfredHints = (obj) => {
-	let hints = '';
+    let hints = '';
 
-	if (obj) {
+    if (obj) {
         if (obj.name) {
             hints = `${obj.name}`;
         }
@@ -57,33 +56,36 @@ const displayAlfredHints = (obj) => {
 
             // TODO: scan project names and warn if they don't exist
         }
-		
-	}
+    }
 
-	const ret = {
-		items: [{
-			title: 'New OmniFocus Task',
-			subtitle: hints,
-            arg: obj.arg
-		}, {
-			title: 'General Tip',
-			subtitle: 'todo <text> [@time ::project #tag]'
-		}, {
-			title: 'Advanced Tip',
-			subtitle: 'todo <text> @deferDate @dueDate ::project #tag1 #tag2 //notes'
-		}]
-	};
+    const ret = {
+        items: [
+            {
+                title: 'New OmniFocus Task',
+                subtitle: hints,
+                arg: obj.arg
+            },
+            {
+                title: 'General Tip',
+                subtitle: 'todo <text> [@time ::project #tag]'
+            },
+            {
+                title: 'Advanced Tip',
+                subtitle: 'todo <text> @deferDate @dueDate ::project #tag1 #tag2 //notes'
+            }
+        ]
+    };
 
-	return ret;
+    return ret;
 };
 
 /**
- * 
+ *
  * @param inputStr {string} - the original input string
  */
 const parseResults = (inputStr) => {
     const outputStr = [];
-	const results = inputStr.split(regex);
+    const results = inputStr.split(regex);
 
     /**
      * @type OFTask
@@ -94,15 +96,15 @@ const parseResults = (inputStr) => {
         tagNames: []
     };
 
-    results.forEach(str => {
+    results.forEach((str) => {
         const index = inputStr.lastIndexOf(str);
 
         const hasTwoPrefixChars = inputStr.charAt(index - 2) !== ' ' && inputStr.charAt(index - 2) !== undefined;
-        const prefixChars = (hasTwoPrefixChars)
+        const prefixChars = hasTwoPrefixChars
             ? `${inputStr.charAt(index - 2)}${inputStr.charAt(index - 1)}`
             : inputStr.charAt(index - 1);
 
-        switch(prefixChars) {
+        switch (prefixChars) {
             case '@':
                 outputStr.push(`#${str}`);
                 break;
@@ -119,9 +121,7 @@ const parseResults = (inputStr) => {
                 break;
 
             default:
-                payload.name = (payload.name) == 'missing name'
-                    ? str 
-                    : `${payload.name} ${str}`;
+                payload.name = payload.name == 'missing name' ? str : `${payload.name} ${str}`;
                 outputStr.push(str);
         }
     });
@@ -135,18 +135,17 @@ const parseResults = (inputStr) => {
 
 /**
  * Main entry point
- * 
+ *
  * @param argv {String[]} - input string array that Alfred sends in from cmd+space
- * @returns 
+ * @returns
  */
 function run(argv) {
-	if (argv.length > 0) {
-
+    if (argv.length > 0) {
         const ofTaskInput = parseResults(argv[0]);
 
         // returning a string here writes to stdout to Alfred for passing to other connected tasks
-		return JSON.stringify(displayAlfredHints(ofTaskInput));
-	}
+        return JSON.stringify(displayAlfredHints(ofTaskInput));
+    }
 
     // not explicitly returning lets Alfred know to keep the spotlight bar open
 }

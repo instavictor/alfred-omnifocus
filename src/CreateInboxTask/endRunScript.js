@@ -1,14 +1,14 @@
 function run(argv) {
-	var taskQuery = argv[0];
-	console.log('Received output: ', taskQuery);
+    var taskQuery = argv[0];
+    console.log('Received output: ', taskQuery);
 
-	const of = Application('OmniFocus');
-	const ofDoc = of.defaultDocument;
+    const of = Application('OmniFocus');
+    const ofDoc = of.defaultDocument;
 
-	of.parseTasksInto(ofDoc, {
-		withTransportText: taskQuery,
-		asSingleTask: true
-	});
+    of.parseTasksInto(ofDoc, {
+        withTransportText: taskQuery,
+        asSingleTask: true
+    });
 
-	return taskQuery;
+    return taskQuery;
 }

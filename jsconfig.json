@@ -1,6 +1,3 @@
 {
-    "exclude": [
-        "**/*_reference.*",
-        "node_modules"
-    ]
+    "exclude": ["**/*_reference.*", "node_modules"]
 }
