@@ -2,7 +2,7 @@
 
 Omnifocus JXA Scripting in Alfred Workflows.
 
-Download the [Alfred workflow here](./dist/Create%20Omnifocus%20Task.alfredworkflow).
+Download the [Alfred workflow here](./dist/Create%20Omnifocus%20Task.alfredworkflow).  This workflow was most recently exported from Alfred 4.
 
 ## Dependencies
 
