@@ -29,6 +29,8 @@ There are a few custom features:
     - `@tomorrow` -> sets the due date for 5 PM tomorrow
     - `@3.30p` -> sets the due date for 3:30 PM today
     - `@today` -> sets the due date for 5 PM today
+    - `@Monday at 13.40` -> sets the due date for next Monday at 1:40 PM (or 13:40) local time
+    - `@August 27 at 13.40` ->  sets the due date for August 27 at 1:40 PM (or 13:40) local time
 - `$` sets the task duration.
 - `//` sets the note for the task.
 
